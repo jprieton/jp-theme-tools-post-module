@@ -107,6 +107,7 @@ add_action( 'wp_ajax_user_post_toggle_favorite', function () {
 		$wpdb->insert( "{$wpdb->prefix}favorite", compact( 'post_id', 'user_id' ) );
 		wp_send_json( TRUE );
 	} else {
+		$wpdb->delete( "{$wpdb->prefix}favorite", compact( 'post_id', 'user_id' ) );
 		wp_send_json( FALSE );
 	}
 }, 10 );
@@ -127,7 +128,6 @@ add_action( 'wp_ajax_user_post_vote', function () {
 		$wpdb->insert( "{$wpdb->prefix}voted", compact( 'post_id', 'user_id', 'vote_value' ) );
 		wp_send_json( TRUE );
 	} else {
-		$wpdb->delete( "{$wpdb->prefix}favorite", compact( 'post_id', 'user_id' ) );
 		wp_send_json( FALSE );
 	}
 }, 10 );
